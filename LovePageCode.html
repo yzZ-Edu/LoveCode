@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Tempo Juntos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff5f5;
+        }
+        #contador, #total {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .titulo {
+            font-size: 28px;
+            color: red;
+            font-weight: bold;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <p class="titulo">Estamos juntos há:</p>
+    <p id="contador"></p>
+
+    <p class="titulo">E isso totaliza:</p>
+    <p id="total"></p>
+
+    <img src="https://i.postimg.cc/vTMmt9mp/file-Bw3g-Q7u-MNBf-D2d-SASrsu9-N.webp" alt="Imagem romântica">
+
+    <script>
+        function atualizarContador() {
+            const dataInicio = new Date("2024-03-30T00:00:00");
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+            const segundos = Math.floor((diferenca / 1000) % 60);
+
+            document.getElementById("contador").textContent = 
+                `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+
+            const meses = Math.floor(dias / 30);
+            const anos = Math.floor(meses / 12);
+            const mesesRestantes = meses % 12;
+
+            document.getElementById("total").textContent = 
+                anos > 0 ? `${anos} anos e ${mesesRestantes} meses` : `${meses} meses`;
+        }
+
+        atualizarContador();
+        setInterval(atualizarContador, 1000);
+    </script>
+
+</body>
+</html>
