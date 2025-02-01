@@ -21,46 +21,105 @@
         }
         img {
             margin-top: 20px;
-            max-width: 80%;
+            height: auto;
+            max-width: 100%;
             height: auto;
         }
+
+    #heartButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+}
+
+    #heartButton:hover {
+        background-color: #d81b60;
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 24px;
+        color: red;
+        animation: floatUp 3s linear forwards;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh);
+            opacity: 0;
+        }
+    }
     </style>
 </head>
 <body>
 
-    <p class="titulo">Estamos juntos há:</p>
-    <p id="contador"></p>
+<p class="titulo">Estamos juntos há:</p>
+<p id="contador"></p>
 
-    <p class="titulo">E isso totaliza:</p>
-    <p id="total"></p>
+<p class="titulo">E isso totaliza:</p>
+<p id="total"></p>
 
-    <img src="https://i.postimg.cc/vTMmt9mp/file-Bw3g-Q7u-MNBf-D2d-SASrsu9-N.webp" alt="Imagem romântica">
+<img src="https://i.postimg.cc/vTMmt9mp/file-Bw3g-Q7u-MNBf-D2d-SASrsu9-N.webp" alt="Imagem romântica">
 
-    <script>
-        function atualizarContador() {
-            const dataInicio = new Date("2024-03-30T00:00:00");
-            const agora = new Date();
-            const diferenca = agora - dataInicio;
+<button id="heartButton">EU TE AMO!</button>
 
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
-            const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
-            const segundos = Math.floor((diferenca / 1000) % 60);
+<script>
+    function atualizarContador() {
+        const dataInicio = new Date("2024-03-30T00:00:00");
+        const agora = new Date();
+        const diferenca = agora - dataInicio;
 
-            document.getElementById("contador").textContent = 
-                `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+        const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+        const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+        const segundos = Math.floor((diferenca / 1000) % 60);
 
-            const meses = Math.floor(dias / 30);
-            const anos = Math.floor(meses / 12);
-            const mesesRestantes = meses % 12;
+        document.getElementById("contador").textContent =
+            `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
 
-            document.getElementById("total").textContent = 
-                anos > 0 ? `${anos} anos e ${mesesRestantes} meses` : `${meses} meses`;
+        const meses = Math.floor(dias / 30);
+        const anos = Math.floor(meses / 12);
+        const mesesRestantes = meses % 12;
+
+        document.getElementById("total").textContent =
+            anos > 0 ? `${anos} anos e ${mesesRestantes} meses` : `${meses} meses`;
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+</script>
+
+<script>
+    document.getElementById("heartButton").addEventListener("click", function() {
+        for (let i = 0; i < 15; i++) {
+            createHeart();
         }
+    });
 
-        atualizarContador();
-        setInterval(atualizarContador, 1000);
-    </script>
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.classList.add("heart");
+        document.body.appendChild(heart);
 
+        // Define posição aleatória
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100vh";
+
+        // Remove o coração depois da animação
+        setTimeout(() => {
+            heart.remove();
+        }, 3000);
+    }
+</script>
 </body>
 </html>
