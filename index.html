@@ -72,6 +72,8 @@
 
 <button id="heartButton">EU TE AMO!</button>
 
+<audio id="backgroundMusic" src="https://yzz-edu.github.io/LoveCode.github.io/Devagarinho-[AudioTrimmer.com].mp3"></audio>
+    
 <script>
     function atualizarContador() {
         const dataInicio = new Date("2024-03-30T00:00:00");
@@ -103,6 +105,9 @@
         for (let i = 0; i < 15; i++) {
             createHeart();
         }
+
+        const music = document.getElementById("backgroundMusic");
+        music.play();
     });
 
     function createHeart() {
